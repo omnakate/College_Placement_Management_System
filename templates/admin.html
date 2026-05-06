@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        input { margin: 5px; padding: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background: #2c3e50; color: white; padding: 10px; }
+        td { padding: 10px; border: 1px solid #ddd; }
+        button { padding: 5px 10px; }
+        .logout {
+            background: #c0392b;
+            color: white;
+            padding: 8px 14px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .logout:hover { background: #962d22; }
+    </style>
+</head>
+<body>
+
+<div class="admin-header">
+    <h2>Admin Dashboard</h2>
+    <a class="logout" href="{{ url_for('admin.logout') }}">Logout</a>
+</div>
+
+<form method="POST" action="{{ url_for('admin.add_company') }}">
+    <input name="company_name" placeholder="Company Name" required>
+    <input name="job_role" placeholder="Job Role" required>
+    <input name="ctc" placeholder="CTC" required>
+    <input name="cgpa" placeholder="CGPA" required>
+    <input name="branches" placeholder="Branches" required>
+    <input name="backlogs" placeholder="Backlogs" required>
+    <input name="deadline" placeholder="Deadline (YYYY-MM-DD HH:MM:SS)" required>
+    <input name="drive_date" placeholder="Drive Date (YYYY-MM-DD)" required>
+    <input name="reporting_time" placeholder="Time (HH:MM:SS)" required>
+    <input name="venue" placeholder="Venue" required>
+    <input name="google_form_link" placeholder="Google Form Link" required>
+
+    <button type="submit">Add Company</button>
+</form>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Company</th>
+<th>Role</th>
+<th>Action</th>
+</tr>
+
+{% for c in companies %}
+<tr>
+<td>{{ c[0] }}</td>
+<td>{{ c[1] }}</td>
+<td>{{ c[2] }}</td>
+<td>
+    <td>
+    <a href="{{ url_for('admin.edit_company', id=c[0]) }}">Edit</a> |
+    <a href="{{ url_for('admin.delete_company', id=c[0]) }}" onclick="return confirm('Delete this company?')">Delete</a>
+</td>
+</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
