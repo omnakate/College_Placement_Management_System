@@ -24,7 +24,10 @@ def login():
         username = request.form.get('username', '').strip()
         password = request.form.get('password', '')
 
-        cur.execute("SELECT * FROM admins WHERE username=%s", (username,))
+        try:
+            cur.execute("SELECT * FROM admins WHERE username=%s", (username,))
+        except Exception as e:
+            return f"Database Error: {e}"
         admin = cur.fetchone()
         cur.close()
 
