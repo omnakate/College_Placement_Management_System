@@ -6,13 +6,13 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 
 # 🔐 Railway MySQL Config
-app.config['MYSQL_HOST'] = os.environ.get('shinkansen.proxy.rlwy.net')
-app.config['MYSQL_USER'] = os.environ.get('root')
-app.config['MYSQL_PASSWORD'] = os.environ.get('ASDCCgQngQSaonnZIxIXgAdesaLHOPGN')
-app.config['MYSQL_DB'] = os.environ.get('railway')
-app.config['MYSQL_PORT'] = int(os.environ.get('10351'))
+app.config['MYSQL_HOST'] = 'shinkansen.proxy.rlwy.net'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'ASDCCgQngQSaonnZIxIXgAdesaLHOPGN'
+app.config['MYSQL_DB'] = 'railway'
+app.config['MYSQL_PORT'] = 10351
 
-app.secret_key = os.environ.get('SECRET_KEY', 'dev_secret_key')
+app.secret_key = 'dev_secret_key'
 
 mysql = MySQL(app)
 
